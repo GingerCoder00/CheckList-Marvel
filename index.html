@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Check-List Marvel</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230a0505' stroke='%23e8262c' stroke-width='3'/%3E%3Cpolygon points='50,14 61,39 88,39 66,55 75,82 50,65 25,82 34,55 12,39 39,39' fill='%23f2b632'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230a0505' stroke='%23e8262c' stroke-width='3'/%3E%3Cpolygon points='50,14 61,39 88,39 66,55 75,82 50,65 25,82 34,55 12,39 39,39' fill='%23f2b632'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0a0505;
+    --panel:#170d0d;
+    --panel-line: rgba(230,150,110,0.14);
+    --red:#e8262c;
+    --gold:#f2b632;
+    --blue:#4da6ff;
+    --green:#6bffb0;
+    --violet:#c49bff;
+    --text:#f3efe9;
+    --dim:#9a8a84;
+    --danger:#ff5d5d;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--void);
+    color:var(--text);
+    font-family:'Barlow', sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* comic-book Ben-Day halftone backdrop */
+  body{
+    background-color:var(--void);
+    background-image:
+      radial-gradient(circle at 50% 0%, rgba(232,38,44,0.16), transparent 55%),
+      radial-gradient(rgba(255,255,255,0.16) 1px, transparent 1.4px);
+    background-size: auto, 15px 15px;
+    background-position: 0 0, 0 0;
+  }
+
+  .burst{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      repeating-conic-gradient(from 0deg at 50% -10%,
+        rgba(242,182,50,0.05) 0deg 4deg,
+        transparent 4deg 12deg);
+    mix-blend-mode: screen;
+    opacity:0.6;
+  }
+
+  .scanline{
+    position:fixed; inset:0; z-index:1; pointer-events:none;
+    background-image: radial-gradient(rgba(0,0,0,0.5) 1px, transparent 1.4px);
+    background-size: 4px 4px;
+    opacity:0.25;
+    mix-blend-mode: multiply;
+  }
+
+  .wrap{
+    position:relative; z-index:2;
+    max-width:760px;
+    margin:0 auto;
+    padding:56px 20px 120px;
+  }
+
+  header{
+    text-align:center;
+    margin-bottom:44px;
+  }
+  .site-icon{
+    width:52px; height:52px;
+    margin:0 auto 14px;
+    filter: drop-shadow(0 0 10px rgba(232,38,44,0.55));
+  }
+  .eyebrow{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:600;
+    letter-spacing:0.35em;
+    font-size:12px;
+    color:var(--red);
+    text-transform:uppercase;
+    opacity:0.9;
+  }
+  h1{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    font-size:clamp(30px, 6vw, 46px);
+    letter-spacing:0.05em;
+    margin:10px 0 6px;
+    background:linear-gradient(180deg, #ffe9c9, var(--gold) 55%, #b5730f);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 0 30px rgba(232,38,44,0.25);
+  }
+  .sub{
+    color:var(--dim);
+    font-size:14px;
+    font-family:'Share Tech Mono', monospace;
+    letter-spacing:0.02em;
+  }
+
+  /* next-up banner */
+  .next-up{
+    border:1px solid rgba(77,166,255,0.35);
+    background:linear-gradient(180deg, rgba(20,32,50,0.55), rgba(10,8,16,0.6));
+    border-radius:6px;
+    padding:16px 20px;
+    margin-bottom:22px;
+    backdrop-filter: blur(6px);
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .next-up::before{
+    content:"";
+    position:absolute; left:0; top:0; bottom:0; width:3px;
+    background:var(--blue);
+    box-shadow:0 0 12px var(--blue);
+  }
+  .next-up-icon{
+    font-size:20px;
+    filter: drop-shadow(0 0 6px rgba(77,166,255,0.6));
+  }
+  .next-up-body{ flex:1; min-width:0; }
+  .next-up-label{
+    font-family:'Share Tech Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    color:var(--blue);
+    margin-bottom:3px;
+  }
+  .next-up-title{
+    font-size:16px;
+    font-weight:600;
+    color:var(--text);
+  }
+  .next-up-sub{
+    font-family:'Share Tech Mono', monospace;
+    font-size:11px;
+    color:var(--dim);
+    margin-top:2px;
+  }
+  .next-up.finished{
+    border-color: rgba(107,255,176,0.35);
+  }
+  .next-up.finished::before{
+    background:var(--green);
+    box-shadow:0 0 12px var(--green);
+  }
+  .next-up.finished .next-up-label{ color:var(--green); }
+
+  /* progress console */
+  .console{
+    border:1px solid var(--panel-line);
+    background:linear-gradient(180deg, rgba(40,18,18,0.7), rgba(10,6,6,0.7));
+    border-radius:6px;
+    padding:18px 20px;
+    margin-bottom:38px;
+    backdrop-filter: blur(6px);
+    position:relative;
+    overflow:hidden;
+  }
+  .console::before{
+    content:"";
+    position:absolute; left:0; top:0; bottom:0; width:3px;
+    background:var(--red);
+    box-shadow:0 0 12px var(--red);
+  }
+  .console-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-family:'Share Tech Mono', monospace;
+    font-size:12px;
+    color:var(--dim);
+    margin-bottom:10px;
+    letter-spacing:0.05em;
+  }
+  .console-row span.val{ color:var(--text); }
+  .gauge{
+    height:10px;
+    border-radius:5px;
+    background:rgba(255,255,255,0.06);
+    overflow:hidden;
+    border:1px solid var(--panel-line);
+  }
+  .gauge-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg, var(--red), var(--gold));
+    box-shadow:0 0 14px var(--red);
+    transition:width 0.5s ease;
+  }
+
+  /* era section */
+  .era{
+    margin-bottom:34px;
+  }
+  .era-head{
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:12px;
+  }
+  .era-dot{
+    width:8px;height:8px;border-radius:50%;
+    box-shadow:0 0 8px currentColor;
+  }
+  .era-title{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    font-size:13px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--dim);
+  }
+  .era-line{
+    flex:1;
+    height:1px;
+    background:linear-gradient(to right, var(--panel-line), transparent);
+  }
+
+  .item{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:13px 16px;
+    margin-bottom:8px;
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-left:3px solid var(--era-color, var(--red));
+    border-radius:4px;
+    transition: background 0.25s ease, transform 0.15s ease, opacity 0.3s ease;
+    cursor:pointer;
+    user-select:none;
+  }
+  .item:hover{
+    background:#231212;
+    transform:translateX(2px);
+  }
+  .item.child{
+    margin-left:26px;
+    padding:10px 16px;
+    border-left-style:dashed;
+    opacity:0.92;
+  }
+  .item.done{
+    opacity:0.55;
+  }
+  .item.done .item-title{
+    text-decoration: line-through;
+    text-decoration-color: var(--green);
+    text-decoration-thickness: 1px;
+  }
+
+  .checkbox{
+    width:22px; height:22px;
+    min-width:22px;
+    border-radius:4px;
+    border:1.5px solid var(--dim);
+    display:flex; align-items:center; justify-content:center;
+    transition: all 0.2s ease;
+    background:rgba(255,255,255,0.02);
+  }
+  .item.done .checkbox{
+    border-color:var(--green);
+    background:radial-gradient(circle, rgba(107,255,176,0.35), rgba(107,255,176,0.05));
+    box-shadow:0 0 10px rgba(107,255,176,0.55);
+  }
+  .checkbox svg{
+    width:13px;height:13px;
+    opacity:0;
+    transform:scale(0.5);
+    transition: all 0.2s ease;
+  }
+  .item.done .checkbox svg{
+    opacity:1;
+    transform:scale(1);
+  }
+
+  .item-body{
+    flex:1;
+    min-width:0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .item-text{ min-width:0; }
+  .item-title{
+    font-size:15px;
+    font-weight:500;
+    color:var(--text);
+  }
+  .item-title a{
+    color:inherit;
+    text-decoration:none;
+    border-bottom:1px dotted var(--blue);
+  }
+  .item-title a:hover{
+    color:var(--blue);
+  }
+  .item.child .item-title{
+    font-size:13.5px;
+    color:#dcd0c9;
+  }
+  .item-type{
+    font-family:'Share Tech Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--dim);
+    margin-top:2px;
+  }
+
+  .imdb-badge{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    font-family:'Share Tech Mono', monospace;
+    font-size:11px;
+    color:var(--gold);
+    background:rgba(242,182,50,0.08);
+    border:1px solid rgba(242,182,50,0.3);
+    border-radius:4px;
+    padding:3px 7px;
+    white-space:nowrap;
+    flex-shrink:0;
+  }
+  .imdb-badge.na{
+    color:var(--dim);
+    background:rgba(255,255,255,0.03);
+    border-color:var(--panel-line);
+  }
+  .imdb-badge .star{ font-size:10px; }
+  .imdb-badge .badge-source{
+    font-size:8px;
+    color:var(--dim);
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    margin-left:2px;
+  }
+  .imdb-badge.na .badge-source{ display:none; }
+
+  .group-head{
+    display:flex; align-items:center; gap:10px;
+    padding:6px 16px 2px;
+    font-family:'Share Tech Mono', monospace;
+    font-size:12px;
+    color:var(--dim);
+  }
+
+  footer{
+    text-align:center;
+    margin-top:50px;
+    font-family:'Share Tech Mono', monospace;
+    font-size:11px;
+    color:var(--dim);
+    letter-spacing:0.08em;
+  }
+  footer button{
+    background:none;
+    border:1px solid var(--panel-line);
+    color:var(--dim);
+    font-family:'Share Tech Mono', monospace;
+    font-size:11px;
+    padding:8px 14px;
+    border-radius:4px;
+    cursor:pointer;
+    margin-top:14px;
+    transition: all 0.2s ease;
+  }
+  footer button:hover{
+    color:var(--danger);
+    border-color:var(--danger);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; animation:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="burst"></div>
+<div class="scanline"></div>
+
+<div class="wrap">
+  <header>
+    <svg class="site-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="48" fill="#0a0505" stroke="#e8262c" stroke-width="3"/>
+      <polygon points="50,14 61,39 88,39 66,55 75,82 50,65 25,82 34,55 12,39 39,39" fill="#f2b632"/>
+    </svg>
+    <div class="eyebrow">Dossier S.H.I.E.L.D. · Registre de visionnage</div>
+    <h1>CHECK-LIST MARVEL</h1>
+    <div class="sub">de Iron Man à Secret Wars — cochez ce que vous avez déjà vu</div>
+  </header>
+
+  <div id="next-up-container"></div>
+
+  <div class="console">
+    <div class="console-row">
+      <span>PROGRESSION</span>
+      <span class="val" id="progress-text">0 / 0</span>
+    </div>
+    <div class="gauge"><div class="gauge-fill" id="gauge-fill"></div></div>
+  </div>
+
+  <div id="list"></div>
+
+  <footer>
+    <div id="save-status">état sauvegardé automatiquement</div>
+    <button id="reset-btn">Réinitialiser le registre</button>
+  </footer>
+</div>
+
+<script>
+const DATA = [
+  {era:'phase1', label:'Phase 1', color:'#4da6ff', items:[
+    {id:'iron-man', title:'Iron Man', type:'Film', rating:{score:7.9, source:'IMDb'}},
+    {id:'hulk', title:"L'Incroyable Hulk", type:'Film · optionnel', rating:{score:6.6, source:'IMDb'}},
+    {id:'iron-man-2', title:'Iron Man 2', type:'Film', rating:{score:6.9, source:'IMDb'}},
+    {id:'thor-1', title:'Thor', type:'Film', rating:{score:7.0, source:'IMDb'}},
+    {id:'cap-1', title:'Captain America : First Avenger', type:'Film', rating:{score:6.9, source:'IMDb'}},
+    {id:'avengers-1', title:'Avengers', type:'Film', rating:{score:8.0, source:'IMDb'}},
+  ]},
+  {era:'phase2', label:'Phase 2', color:'#f2b632', items:[
+    {id:'iron-man-3', title:'Iron Man 3', type:'Film', rating:{score:7.1, source:'IMDb'}},
+    {id:'thor-2', title:'Thor : Le Monde des Ténèbres', type:'Film', rating:{score:6.8, source:'IMDb'}},
+    {id:'cap-2', title:"Captain America : Le Soldat de l'Hiver", type:'Film', rating:{score:7.7, source:'IMDb'}},
+    {id:'gotg-1', title:'Les Gardiens de la Galaxie', type:'Film', rating:{score:8.0, source:'IMDb'}},
+    {id:'avengers-2', title:"Avengers : L'Ère d'Ultron", type:'Film', rating:{score:7.3, source:'IMDb'}},
+    {id:'ant-man-1', title:'Ant-Man', type:'Film', rating:{score:7.3, source:'IMDb'}},
+  ]},
+  {era:'phase3', label:'Phase 3', color:'#e8262c', items:[
+    {id:'cap-3', title:'Captain America : Civil War', type:'Film', rating:{score:7.8, source:'IMDb'}},
+    {id:'doctor-strange', title:'Doctor Strange', type:'Film', rating:{score:7.5, source:'IMDb'}},
+    {id:'gotg-2', title:'Les Gardiens de la Galaxie Vol. 2', type:'Film', rating:{score:7.6, source:'IMDb'}},
+    {id:'spiderman-homecoming', title:'Spider-Man : Homecoming', type:'Film', rating:{score:7.4, source:'IMDb'}},
+    {id:'thor-3', title:'Thor : Ragnarok', type:'Film', rating:{score:7.9, source:'IMDb'}},
+    {id:'black-panther', title:'Black Panther', type:'Film', rating:{score:7.3, source:'IMDb'}},
+    {id:'infinity-war', title:'Avengers : Infinity War', type:'Film', rating:{score:8.4, source:'IMDb'}},
+    {id:'ant-man-2', title:'Ant-Man et la Guêpe', type:'Film', rating:{score:7.0, source:'IMDb'}},
+    {id:'captain-marvel', title:'Captain Marvel', type:'Film', rating:{score:6.8, source:'IMDb'}},
+    {id:'endgame', title:'Avengers : Endgame', type:'Film', rating:{score:8.4, source:'IMDb'}},
+    {id:'spiderman-ffh', title:'Spider-Man : Far From Home', type:'Film', rating:{score:7.4, source:'IMDb'}},
+  ]},
+  {era:'phase4', label:'Phase 4', color:'#2dd4bf', items:[
+    {id:'wandavision', title:'WandaVision', type:'Série', rating:{score:7.9, source:'IMDb'}},
+    {id:'falcon-ws', title:'Falcon et le Soldat de l\'Hiver', type:'Série', rating:{score:7.3, source:'IMDb'}},
+    {id:'loki-s1', title:'Loki', type:'Série', children:[
+      {id:'loki-s1-only', title:'Saison 1', rating:{score:8.2, source:'IMDb'}},
+    ]},
+    {id:'black-widow', title:'Black Widow', type:'Film', rating:{score:6.7, source:'IMDb'}},
+    {id:'shang-chi', title:'Shang-Chi et la Légende des Dix Anneaux', type:'Film', rating:{score:7.4, source:'IMDb'}},
+    {id:'eternals', title:'Eternals', type:'Film', rating:{score:6.3, source:'IMDb'}},
+    {id:'hawkeye', title:'Hawkeye', type:'Série', rating:{score:7.6, source:'IMDb'}},
+    {id:'spiderman-nwh', title:'Spider-Man : No Way Home', type:'Film', rating:{score:8.2, source:'IMDb'}},
+    {id:'doctor-strange-2', title:'Doctor Strange in the Multiverse of Madness', type:'Film', rating:{score:6.9, source:'IMDb'}},
+    {id:'ms-marvel', title:'Ms. Marvel', type:'Série', rating:{score:6.0, source:'IMDb'}},
+    {id:'thor-4', title:'Thor : Love and Thunder', type:'Film', rating:{score:6.2, source:'IMDb'}},
+    {id:'black-panther-2', title:'Black Panther : Wakanda Forever', type:'Film', rating:{score:6.7, source:'IMDb'}},
+  ]},
+  {era:'phase5', label:'Phase 5', color:'#c49bff', items:[
+    {id:'antman-3', title:'Ant-Man et la Guêpe : Quantumania', type:'Film', rating:{score:6.0, source:'IMDb'}},
+    {id:'gotg-3', title:'Les Gardiens de la Galaxie Vol. 3', type:'Film', rating:{score:7.9, source:'IMDb'}},
+    {id:'loki-s2', title:'Loki', type:'Série', children:[
+      {id:'loki-s2-only', title:'Saison 2', rating:{score:8.5, source:'IMDb'}},
+    ]},
+    {id:'the-marvels', title:'The Marvels', type:'Film', rating:{score:5.7, source:'IMDb'}},
+    {id:'deadpool-1', title:'Deadpool', type:'Film Fox · recommandé avant Deadpool & Wolverine', rating:{score:8.0, source:'IMDb'}},
+    {id:'deadpool-2', title:'Deadpool 2', type:'Film Fox · recommandé avant Deadpool & Wolverine', rating:{score:7.6, source:'IMDb'}},
+    {id:'deadpool-wolverine', title:'Deadpool & Wolverine', type:'Film', rating:{score:7.7, source:'IMDb'}},
+    {id:'daredevil-ba-s1', title:'Daredevil : Born Again', type:'Série', children:[
+      {id:'dd-ba-s1-only', title:'Saison 1', rating:{score:8.6, source:'IMDb'}},
+    ]},
+    {id:'thunderbolts', title:'Thunderbolts*', type:'Film', rating:{score:7.4, source:'IMDb'}},
+  ]},
+  {era:'phase6', label:'Phase 6', color:'#ff8c42', items:[
+    {id:'fantastic-four', title:'Les Quatre Fantastiques : Premiers Pas', type:'Film', rating:{score:7.6, source:'IMDb'}},
+    {id:'wonder-man', title:'Wonder Man', type:'Série', rating:{score:7.5, source:'IMDb'}},
+    {id:'daredevil-ba-s2', title:'Daredevil : Born Again', type:'Série', children:[
+      {id:'dd-ba-s2-only', title:'Saison 2', rating:{score:8.0, source:'IMDb'}},
+    ]},
+    {id:'spiderman-bnd', title:'Spider-Man : Brand New Day', type:'Film', rating:{score:8.0, source:'IMDb'}},
+    {id:'avengers-doomsday', title:'Avengers : Doomsday', type:'Film · à venir (18 décembre 2026)', rating:null},
+    {id:'visionquest', title:'VisionQuest', type:'Série · à venir (fin 2026)', rating:null},
+    {id:'daredevil-ba-s3', title:'Daredevil : Born Again', type:'Série · à venir (mars 2027)', children:[
+      {id:'dd-ba-s3-only', title:'Saison 3', rating:null},
+    ]},
+    {id:'avengers-secret-wars', title:'Avengers : Secret Wars', type:'Film · à venir (17 décembre 2027) — finale de la Saga du Multivers', rating:null},
+  ]},
+];
+
+const STORAGE_KEY = 'marvel-checklist-state';
+let checked = {};
+
+function checkIcon(){
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:#6bffb0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+}
+
+// Liste ordonnée et aplatie de tous les éléments cochables, avec leur contexte (série parente + phase)
+function flattenOrdered(){
+  const flat = [];
+  DATA.forEach(section => section.items.forEach(it => {
+    if(it.children){
+      it.children.forEach(c => flat.push({id:c.id, title:c.title, rating:c.rating, parent:it.title, era:section.label}));
+    } else {
+      flat.push({id:it.id, title:it.title, rating:it.rating, parent:null, era:section.label});
+    }
+  }));
+  return flat;
+}
+
+function allCheckableIds(){
+  return flattenOrdered().map(it => it.id);
+}
+
+function imdbBadge(rating){
+  if(!rating){
+    return `<div class="imdb-badge na" title="Pas encore de note disponible"><span class="star">☆</span>N/A</div>`;
+  }
+  const value = rating.suffix ? `${rating.score}${rating.suffix}` : rating.score.toFixed(1);
+  return `<div class="imdb-badge" title="Source : ${rating.source}"><span class="star">★</span>${value}<span class="badge-source">${rating.source}</span></div>`;
+}
+
+function renderNextUp(){
+  const container = document.getElementById('next-up-container');
+  const flat = flattenOrdered();
+  const next = flat.find(it => !checked[it.id]);
+  if(!next){
+    container.innerHTML = `
+      <div class="next-up finished">
+        <div class="next-up-icon">✓</div>
+        <div class="next-up-body">
+          <div class="next-up-label">Registre complet</div>
+          <div class="next-up-title">Vous avez tout regardé, Avengers Assemble !</div>
+        </div>
+      </div>
+    `;
+    return;
+  }
+  const subtitle = next.parent ? `${next.parent} — ${next.era}` : next.era;
+  container.innerHTML = `
+    <div class="next-up">
+      <div class="next-up-icon">▶</div>
+      <div class="next-up-body">
+        <div class="next-up-label">Prochain à regarder</div>
+        <div class="next-up-title">${next.title}</div>
+        <div class="next-up-sub">${subtitle}</div>
+      </div>
+    </div>
+  `;
+}
+
+function render(){
+  const listEl = document.getElementById('list');
+  listEl.innerHTML = '';
+  DATA.forEach(section => {
+    const eraDiv = document.createElement('div');
+    eraDiv.className = 'era';
+    eraDiv.innerHTML = `
+      <div class="era-head">
+        <div class="era-dot" style="color:${section.color}; background:${section.color};"></div>
+        <div class="era-title">${section.label}</div>
+        <div class="era-line"></div>
+      </div>
+    `;
+    section.items.forEach(it => {
+      if(it.children){
+        const groupHead = document.createElement('div');
+        groupHead.className = 'group-head';
+        groupHead.textContent = it.title;
+        eraDiv.appendChild(groupHead);
+        it.children.forEach(c => eraDiv.appendChild(renderItem(c, section.color, true)));
+      } else {
+        eraDiv.appendChild(renderItem(it, section.color, false));
+      }
+    });
+    listEl.appendChild(eraDiv);
+  });
+  renderNextUp();
+  updateProgress();
+}
+
+function renderItem(it, color, isChild){
+  const div = document.createElement('div');
+  div.className = 'item' + (isChild ? ' child' : '') + (checked[it.id] ? ' done' : '');
+  div.style.setProperty('--era-color', color);
+  const titleHtml = it.link
+    ? `<a href="${it.link}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">${it.title}</a>`
+    : it.title;
+  div.innerHTML = `
+    <div class="checkbox">${checkIcon()}</div>
+    <div class="item-body">
+      <div class="item-text">
+        <div class="item-title">${titleHtml}</div>
+        ${it.type ? `<div class="item-type">${it.type}</div>` : ''}
+      </div>
+      ${imdbBadge(it.rating)}
+    </div>
+  `;
+  div.addEventListener('click', () => toggle(it.id));
+  return div;
+}
+
+function toggle(id){
+  checked[id] = !checked[id];
+  save();
+  render();
+}
+
+function updateProgress(){
+  const ids = allCheckableIds();
+  const done = ids.filter(id => checked[id]).length;
+  document.getElementById('progress-text').textContent = `${done} / ${ids.length}`;
+  document.getElementById('gauge-fill').style.width = ids.length ? `${(done/ids.length)*100}%` : '0%';
+}
+
+function save(){
+  const statusEl = document.getElementById('save-status');
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
+    statusEl.textContent = 'état sauvegardé automatiquement';
+  }catch(e){
+    statusEl.textContent = "sauvegarde indisponible — l'état reste local à cette session";
+  }
+}
+
+function load(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      checked = JSON.parse(raw);
+    }
+  }catch(e){
+    checked = {};
+  }
+  render();
+}
+
+document.getElementById('reset-btn').addEventListener('click', () => {
+  if(confirm('Réinitialiser tout le registre de visionnage ?')){
+    checked = {};
+    save();
+    render();
+  }
+});
+
+load();
+</script>
+
+</body>
+</html>
