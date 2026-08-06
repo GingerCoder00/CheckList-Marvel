@@ -50,23 +50,29 @@ Une page web interactive (fichier HTML unique, sans dépendance externe) permett
 - Falcon et le Soldat de l'Hiver
 - Loki *(Saison 1)*
 - Black Widow
+- What If...? *(Saison 1)*
 - Shang-Chi et la Légende des Dix Anneaux
 - Eternals
 - Hawkeye
 - Spider-Man : No Way Home
+- Moon Knight
 - Doctor Strange in the Multiverse of Madness
 - Ms. Marvel
 - Thor : Love and Thunder
+- She-Hulk : Avocate
 - Black Panther : Wakanda Forever
+- Les Gardiens de la Galaxie : Joyeuses Fêtes
 
 ### Phase 5
 - Ant-Man et la Guêpe : Quantumania
 - Les Gardiens de la Galaxie Vol. 3
+- Secret Invasion
 - Loki *(Saison 2)*
 - The Marvels
 - Deadpool *(Film Fox, recommandé avant Deadpool & Wolverine)*
 - Deadpool 2 *(Film Fox, recommandé avant Deadpool & Wolverine)*
 - Deadpool & Wolverine
+- Captain America : Brave New World
 - Daredevil : Born Again *(Saison 1)*
 - Thunderbolts*
 
@@ -74,6 +80,7 @@ Une page web interactive (fichier HTML unique, sans dépendance externe) permett
 - Les Quatre Fantastiques : Premiers Pas
 - Wonder Man
 - Daredevil : Born Again *(Saison 2)*
+- The Punisher : One Last Kill
 - Spider-Man : Brand New Day
 - Avengers : Doomsday *(à venir — 18 décembre 2026)*
 - VisionQuest *(à venir — fin 2026)*

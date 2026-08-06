@@ -62,6 +62,31 @@
     mix-blend-mode: multiply;
   }
 
+  /* decorative comic-book icons floating in the backdrop */
+  .decor{
+    position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+  }
+  .decor svg{
+    position:absolute;
+    filter: drop-shadow(0 0 18px currentColor);
+  }
+  .decor .d1{ top:-40px; right:-60px; width:340px; height:340px; color:var(--red); opacity:0.10; transform:rotate(-8deg); }
+  .decor .d2{ bottom:-40px; left:-70px; width:300px; height:300px; color:var(--blue); opacity:0.08; transform:rotate(12deg); }
+  .decor .d3{ top:36%; right:-40px; width:180px; height:180px; color:var(--gold); opacity:0.12; transform:rotate(20deg); }
+  .decor .d4{ top:12%; left:-50px; width:220px; height:220px; color:var(--violet); opacity:0.07; transform:rotate(-15deg); }
+  .decor .d5{ bottom:-60px; right:8%; width:260px; height:260px; color:var(--green); opacity:0.06; transform:rotate(6deg); }
+  .decor .star{ color:var(--gold); opacity:0.18; }
+  .decor .s1{ top:8%; left:5%; width:14px; height:14px; }
+  .decor .s2{ top:18%; right:8%; width:10px; height:10px; }
+  .decor .s3{ top:30%; left:9%; width:8px; height:8px; }
+  .decor .s4{ top:42%; right:5%; width:16px; height:16px; }
+  .decor .s5{ top:54%; left:7%; width:10px; height:10px; }
+  .decor .s6{ top:63%; right:11%; width:12px; height:12px; }
+  .decor .s7{ top:75%; left:6%; width:9px; height:9px; }
+  .decor .s8{ top:88%; right:9%; width:13px; height:13px; }
+  .decor .s9{ top:96%; left:22%; width:11px; height:11px; }
+  .decor .s10{ top:3%; right:28%; width:14px; height:14px; }
+
   .wrap{
     position:relative; z-index:2;
     max-width:760px;
@@ -390,6 +415,23 @@
 
 <div class="burst"></div>
 <div class="scanline"></div>
+<div class="decor">
+  <svg class="d1" viewBox="0 0 100 100"><polygon points="50,4 61,36 92,36 66,55 76,90 50,68 24,90 34,55 8,36 39,36" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+  <svg class="d2" viewBox="0 0 100 100"><polygon points="50,4 90,27 90,73 50,96 10,73 10,27" fill="none" stroke="currentColor" stroke-width="2"/><polygon points="50,20 76,35 76,65 50,80 24,65 24,35" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+  <svg class="d3" viewBox="0 0 60 100"><polygon points="35,2 8,55 26,55 20,98 52,42 32,42" fill="currentColor"/></svg>
+  <svg class="d4" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+  <svg class="d5" viewBox="0 0 200 60"><line x1="0" y1="10" x2="140" y2="10" stroke="currentColor" stroke-width="3"/><line x1="0" y1="30" x2="180" y2="30" stroke="currentColor" stroke-width="3"/><line x1="0" y1="50" x2="120" y2="50" stroke="currentColor" stroke-width="3"/></svg>
+  <svg class="star s1" viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/></svg>
+  <svg class="star s2" viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/></svg>
+  <svg class="star s3" viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/></svg>
+  <svg class="star s4" viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/></svg>
+  <svg class="star s5" viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/></svg>
+  <svg class="star s6" viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/></svg>
+  <svg class="star s7" viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/></svg>
+  <svg class="star s8" viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/></svg>
+  <svg class="star s9" viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/></svg>
+  <svg class="star s10" viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/></svg>
+</div>
 
 <div class="wrap">
   <header>
@@ -458,18 +500,25 @@ const DATA = [
       {id:'loki-s1-only', title:'Saison 1', rating:{score:8.2, source:'IMDb'}},
     ]},
     {id:'black-widow', title:'Black Widow', type:'Film', rating:{score:6.7, source:'IMDb'}},
+    {id:'what-if-s1', title:'What If...?', type:'Série', children:[
+      {id:'what-if-s1-only', title:'Saison 1', rating:{score:7.8, source:'IMDb'}},
+    ]},
     {id:'shang-chi', title:'Shang-Chi et la Légende des Dix Anneaux', type:'Film', rating:{score:7.4, source:'IMDb'}},
     {id:'eternals', title:'Eternals', type:'Film', rating:{score:6.3, source:'IMDb'}},
     {id:'hawkeye', title:'Hawkeye', type:'Série', rating:{score:7.6, source:'IMDb'}},
     {id:'spiderman-nwh', title:'Spider-Man : No Way Home', type:'Film', rating:{score:8.2, source:'IMDb'}},
+    {id:'moon-knight', title:'Moon Knight', type:'Série', rating:{score:7.4, source:'IMDb'}},
     {id:'doctor-strange-2', title:'Doctor Strange in the Multiverse of Madness', type:'Film', rating:{score:6.9, source:'IMDb'}},
     {id:'ms-marvel', title:'Ms. Marvel', type:'Série', rating:{score:6.0, source:'IMDb'}},
     {id:'thor-4', title:'Thor : Love and Thunder', type:'Film', rating:{score:6.2, source:'IMDb'}},
+    {id:'she-hulk', title:'She-Hulk : Avocate', type:'Série', rating:{score:4.9, source:'IMDb'}},
     {id:'black-panther-2', title:'Black Panther : Wakanda Forever', type:'Film', rating:{score:6.7, source:'IMDb'}},
+    {id:'gotg-holiday', title:'Les Gardiens de la Galaxie : Joyeuses Fêtes', type:'Spécial', rating:{score:7.4, source:'IMDb'}},
   ]},
   {era:'phase5', label:'Phase 5', color:'#c49bff', items:[
     {id:'antman-3', title:'Ant-Man et la Guêpe : Quantumania', type:'Film', rating:{score:6.0, source:'IMDb'}},
     {id:'gotg-3', title:'Les Gardiens de la Galaxie Vol. 3', type:'Film', rating:{score:7.9, source:'IMDb'}},
+    {id:'secret-invasion', title:'Secret Invasion', type:'Série', rating:{score:5.7, source:'IMDb'}},
     {id:'loki-s2', title:'Loki', type:'Série', children:[
       {id:'loki-s2-only', title:'Saison 2', rating:{score:8.5, source:'IMDb'}},
     ]},
@@ -477,6 +526,7 @@ const DATA = [
     {id:'deadpool-1', title:'Deadpool', type:'Film Fox · recommandé avant Deadpool & Wolverine', rating:{score:8.0, source:'IMDb'}},
     {id:'deadpool-2', title:'Deadpool 2', type:'Film Fox · recommandé avant Deadpool & Wolverine', rating:{score:7.6, source:'IMDb'}},
     {id:'deadpool-wolverine', title:'Deadpool & Wolverine', type:'Film', rating:{score:7.7, source:'IMDb'}},
+    {id:'cap-4', title:'Captain America : Brave New World', type:'Film', rating:{score:5.6, source:'IMDb'}},
     {id:'daredevil-ba-s1', title:'Daredevil : Born Again', type:'Série', children:[
       {id:'dd-ba-s1-only', title:'Saison 1', rating:{score:8.6, source:'IMDb'}},
     ]},
@@ -488,6 +538,7 @@ const DATA = [
     {id:'daredevil-ba-s2', title:'Daredevil : Born Again', type:'Série', children:[
       {id:'dd-ba-s2-only', title:'Saison 2', rating:{score:8.0, source:'IMDb'}},
     ]},
+    {id:'punisher-special', title:'The Punisher : One Last Kill', type:'Spécial', rating:{score:6.4, source:'IMDb'}},
     {id:'spiderman-bnd', title:'Spider-Man : Brand New Day', type:'Film', rating:{score:8.0, source:'IMDb'}},
     {id:'avengers-doomsday', title:'Avengers : Doomsday', type:'Film · à venir (18 décembre 2026)', rating:null},
     {id:'visionquest', title:'VisionQuest', type:'Série · à venir (fin 2026)', rating:null},
